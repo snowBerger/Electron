@@ -18,7 +18,7 @@ function createWindow() {
   win = new BrowserWindow({ width: 1104, height: 620 });//570+50
 
   // 并且装载应用的 index.html 页面
-  win.loadURL(`file://${__dirname}/../html/index.html`);
+  win.loadURL(`file://${__dirname}/index.html`);
 
   // 打开开发工具页面
   win.webContents.openDevTools();
