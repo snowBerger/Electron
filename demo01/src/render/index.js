@@ -1,10 +1,10 @@
 // 渲染进程代码 /src/render/index.js
 // 打开新窗口属性用法有点类似vscode打开新的窗口
 
-const btn = document.querySelector('#btn');
 const path = require('path');
 const BrowerWindow = require('electron').remote.BrowserWindow;
 
+let btn = document.querySelector('#btn');
 btn.onclick = () => {
   win = new BrowerWindow({
     width: 300,
