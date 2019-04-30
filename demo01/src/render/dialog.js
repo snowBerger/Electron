@@ -5,8 +5,6 @@ let showMsg = document.querySelector('#showMsg');
 let showOpenDialog = document.querySelector('#showOpenDialog');
 let saveDialog = document.querySelector('#saveDialog');
 
-var { remote } = require('electron')
-
 showError.onclick = function () {
   remote.dialog.showErrorBox('警告', '操作有误')
 }
