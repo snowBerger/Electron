@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <button id='button'>获取 package.json</button>
+    <button id='btn'>打开新窗口</button>
+    <div id="content"></div>
+  </div>
+  <script>
+    var fs = require('fs');
+    var content = document.getElementById('content');
+    var button = document.getElementById('button');
+
+    button.addEventListener('click', function (e) {
+      fs.readFile('package.json', 'utf8', function (err, data) {
+        content.textContent = data;
+        console.log(data);
+      });
+    });
+  </script>
+  <script src="../src/render/index.js"></script>
+  <script src="../src/render/menu.js"></script>
+</body>
+
+</html>
