@@ -13,6 +13,8 @@ const { BrowserWindow } = electron;
 // 时候该窗口将会自动关闭
 let win;
 
+require('./main/shortCut.js')
+
 function createWindow() {
   // 创建一个新的浏览器窗口
   win = new BrowserWindow({ width: 1104, height: 620 });//570+50
@@ -29,11 +31,12 @@ function createWindow() {
     win = null;
   });
 
+  // 引入功能模块
   // 创建菜单  
-  // 引入菜单模块
   require('./main/menu.js')
   require('./main/ipcMain.js')
   require('./main/ipcMain2.js')
+  require('./main/tray.js')
 }
 
 // 当 Electron 完成初始化并且已经创建了浏览器窗口，则该方法将会被调用。
