@@ -39,7 +39,7 @@ export default {
     settingConfig() {
       localStorage.setItem("workDuration", this.workDuration);
       localStorage.setItem("restDuration", this.restDuration);
-      this.$router.push('/')
+      // this.$router.push('/')
       this.initApp();
     }
   }
