@@ -2,10 +2,11 @@
   <div id="app">
     <div class="content">
       <router-view
-        :startTimer="startTimer"
         :workDuration="workDuration"
-        :countdownH="countdownH"
+        :countdownM="countdownM"
         :countdownS="countdownS"
+        :startTimer="startTimer"
+        :initApp="initApp"
       ></router-view>
     </div>
     <div class="menu">
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { clearInterval } from 'timers';
+import { clearInterval } from "timers";
 export default {
   name: "app",
   data() {
@@ -43,19 +44,38 @@ export default {
         }
       ],
       timer: null,
-      workDuration: 25,
-      countdownH: 25,
-      countdownS: 0
+      workDuration: 25, // 工作时长，默认25分钟
+      restDuration: 5, // 休息时长，默认5分钟
+      countdownM: 25, // 当前番茄分
+      countdownS: 0 // 当前番茄秒
     };
   },
+  mounted() {
+    this.initApp();
+  },
   methods: {
+    // 初始化
+    initApp() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.workDuration =
+        +localStorage.getItem("workDuration") || this.workDuration;
+      this.restDuration =
+        +localStorage.getItem("restDuration") || this.restDuration;
+      this.countdownM = this.workDuration;
+      this.countdownS = 0;
+    },
     startTimer() {
+      if (this.timer) {
+        alert("already has a timer");
+        return;
+      }
       this.countDown();
       this.$router.push("/timer");
     },
     clearTimer() {
-      clearInterval(this.timer)
-      this.timer = null
+      clearInterval(this.timer);
+      this.timer = null;
     },
     /**
      * 开始计时
@@ -63,10 +83,10 @@ export default {
     countDown() {
       this.countdown = this.workDuration;
       this.timer = setInterval(() => {
-        if (this.countdownH === 0) return;
+        if (this.countdownM === 0) return;
         if (this.countdownS > 0) this.countdownS -= 1;
         else {
-          this.countdownH -= 1;
+          this.countdownM -= 1;
           this.countdownS = 59;
         }
       }, 1000);

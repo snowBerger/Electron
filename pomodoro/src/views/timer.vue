@@ -4,7 +4,7 @@
       :diameter="240"
       :line-width="18"
       :percent="progress"
-      :text="(countdownH + '').padStart(2, '0') + ':' + (countdownS + '').padStart(2, '0')"
+      :text="(countdownM + '').padStart(2, '0') + ':' + (countdownS + '').padStart(2, '0')"
     />
   </div>
 </template>
@@ -13,16 +13,8 @@
 import CircleProgress from "../components/CircleProgress";
 
 export default {
-  data() {
-    return {
-      // timer: null,
-      // workDuration: 25,
-      // countdownH: 25,
-      // countdownS: 0
-    };
-  },
   props: {
-    countdownH: {
+    countdownM: {
       type: Number,
       default: 25
     },
@@ -41,20 +33,9 @@ export default {
   computed: {
     progress() {
       return (
-        1 - (this.countdownH * 60 + this.countdownS) / (this.workDuration * 60)
+        1 - (this.countdownM * 60 + this.countdownS) / (this.workDuration * 60)
       );
     }
   },
-  mounted() {
-    // this.countdown = this.workDuration;
-    // this.timer = setInterval(() => {
-    //   if (this.countdownH === 0) return;
-    //   if (this.countdownS > 0) this.countdownS -= 1;
-    //   else {
-    //     this.countdownH -= 1;
-    //     this.countdownS = 59;
-    //   }
-    // }, 1000);
-  }
 };
 </script>
