@@ -1,36 +1,78 @@
 <template>
   <div id="app">
     <div class="content">
-      <TodoList/>
-      <router-view></router-view>
+      <router-view
+        :startTimer="startTimer"
+        :workDuration="workDuration"
+        :countdownH="countdownH"
+        :countdownS="countdownS"
+      ></router-view>
     </div>
     <div class="menu">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconchazhaobiaodanliebiao"></use>
-      </svg>
-      <svg class="icon" aria-hidden="true" @click="goPage('timer')">
-        <use xlink:href="#iconkaishi"></use>
-      </svg>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconshezhi"></use>
+      <svg
+        class="icon"
+        aria-hidden="true"
+        v-for="(item, index) in menus"
+        :key="index"
+        @click="goPage(item.key)"
+      >
+        <use :xlink:href="'#' + item.icon"></use>
       </svg>
     </div>
   </div>
 </template>
 
 <script>
-import TodoList from "./components/TodoList.vue";
-
+import { clearInterval } from 'timers';
 export default {
   name: "app",
-  components: {
-    TodoList
+  data() {
+    return {
+      menus: [
+        {
+          key: "tasks",
+          icon: "iconchazhaobiaodanliebiao"
+        },
+        {
+          key: "timer",
+          icon: "iconkaishi"
+        },
+        {
+          key: "setting",
+          icon: "iconshezhi"
+        }
+      ],
+      timer: null,
+      workDuration: 25,
+      countdownH: 25,
+      countdownS: 0
+    };
   },
   methods: {
+    startTimer() {
+      this.countDown();
+      this.$router.push("/timer");
+    },
+    clearTimer() {
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    /**
+     * 开始计时
+     */
+    countDown() {
+      this.countdown = this.workDuration;
+      this.timer = setInterval(() => {
+        if (this.countdownH === 0) return;
+        if (this.countdownS > 0) this.countdownS -= 1;
+        else {
+          this.countdownH -= 1;
+          this.countdownS = 59;
+        }
+      }, 1000);
+    },
     goPage(name) {
-      alert(this.$route.path);
       this.$router.push({ name: name });
-      alert(this.$route.path);
     }
   }
 };
@@ -49,6 +91,17 @@ export default {
   .content {
     flex: 1;
   }
+  // .content::before {
+  //   content: '';
+  //   display: block;
+  //   width: 0;
+  //   height: 0;
+  //   border-top: none;
+  //   border-bottom: 10px solid #0F0;
+  //   border-left: 5px solid transparent;
+  //   border-right: 5px solid transparent;
+  //   top: -10px;
+  // }
   .menu {
     height: 38px;
     background: #333a3f;
@@ -62,6 +115,9 @@ export default {
     }
     & > .icon:nth-child(2) {
       font-size: 16px;
+    }
+    & > .icon:hover {
+      cursor: pointer;
     }
   }
 }

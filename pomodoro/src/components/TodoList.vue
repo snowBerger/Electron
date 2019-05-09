@@ -34,19 +34,33 @@ export default {
   data() {
     return {
       keywords: "",
-      list: ["完成一个脚手架"]
+      list: [],
     };
+  },
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    },
+    startTask: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  created() {
+    this.list = this.data
   },
   methods: {
     add() {
       this.keywords && this.list.push(this.keywords);
-      this.keywords = '';
+      this.keywords = "";
     },
     finish(index) {
       alert("finish" + index);
     },
-    start(index) {
-      alert("start" + index);
+    start() {
+      // this.$router.push('/timer')
+      this.startTask()
     },
     del(index) {
       this.list.splice(index, 1);
