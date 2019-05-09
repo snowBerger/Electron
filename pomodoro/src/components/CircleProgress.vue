@@ -74,7 +74,8 @@ export default {
   },
   watch: {
     percent(nVal, oVal) {
-      if (nVal && nVal !== oVal) this.drawCircle();
+      if (nVal === 0) this.tmpAngle = 1.5 * Math.PI;
+      if (nVal !== oVal) this.drawCircle();
     }
   },
   mounted() {

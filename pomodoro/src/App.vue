@@ -154,7 +154,7 @@ export default {
           if (this.timerFlag === "task")
             alert("恭喜你完成了一个🍅任务，休息一下吧😁");
           else if (this.timerFlag === "rest")
-            alert("恭喜你完成了一个🍅任务，休息一下吧😁");
+            alert("休息够了，继续完成任务吧💪");
           this.stop();
           return;
         }
