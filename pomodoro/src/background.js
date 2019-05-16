@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, Menu, ipcMain, shell } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -10,19 +10,32 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let settingWin
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true } }])
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 280,
+    width: 320,
     height: 400,
     frame: false,
     // resizable: false,
-    transparent: true,
+    // transparent: true,
     // opacity: 1.0,
+    icon: '/Users/berger/development/Electron/pomodoro/src/assets/logo.icns',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+
+  // Create the setting window.
+  settingWin = new BrowserWindow({
+    width: 280,
+    height: 250,
+    parent: win,
+    show: false,
     webPreferences: {
       nodeIntegration: true
     }
@@ -32,6 +45,8 @@ function createWindow() {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     // if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // load the setting url
+    settingWin.loadURL(process.env.WEBPACK_DEV_SERVER_URL + '/#/setting')
   } else {
     createProtocol('app')
     // Load the index.html when not in development
@@ -41,6 +56,47 @@ function createWindow() {
   win.on('closed', () => {
     win = null
   })
+
+  settingWin.on('close', e => {
+    e.preventDefault()
+    settingWin.hide()
+  })
+
+  // 菜单项目
+  const menuTemp = Menu.buildFromTemplate([
+    {
+      label: 'Pomodoro',
+      submenu: [
+        {
+          label: '我的团队',
+          click: function () {
+            shell.openExternal('https://github.com/icx-front')
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: '联系我',
+          click: function () {
+            shell.openExternal('https://github.com/snowBerger')
+          },
+        }
+      ]
+    },
+    {
+      label: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click: function () {
+            shell.openExternal('https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95')
+          },
+        }
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menuTemp)
 }
 
 // Quit when all windows are closed.
@@ -89,3 +145,24 @@ if (isDevelopment) {
     })
   }
 }
+
+// listen quit event.
+ipcMain.on('on-quit', (event, data) => {
+  // app.quit()
+  app.exit()
+})
+
+// listen setting window event.
+ipcMain.on('open-setting', (event, data) => {
+  settingWin.show()
+})
+
+ipcMain.on('setting', (event, data) => {
+  settingWin.hide()
+  // 摄制完成，广播消息初始化App
+  event.sender.send('initApp', '初始化App')
+})
+
+ipcMain.on('cancle', (event, data) => {
+  settingWin.hide()
+})

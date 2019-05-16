@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>render to render by webContents page.</div>
+  <script>
+    const { ipcRenderer, remote } = require('electron');
+    // 注意这里 在渲染进程中需要从remote中获取BrowserWindow
+    const { BrowserWindow } = remote;
+
+    // 监听主进程传递过来的数据 
+    ipcRenderer.on('toNews', (e, data, winId) => {
+      // 获取对应ID的窗口
+      let firstWin = BrowserWindow.fromId(winId)
+      firstWin.webContents.send('toIndex', '来自news进程反馈的信息')
+      console.log(data)
+    })
+  </script>
+</body>
+
+</html>

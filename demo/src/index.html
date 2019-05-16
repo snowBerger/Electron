@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  Hello Electron, Well hey there!!!
+  <div>
+    <div>eg: 01</div>
+    <button id="read">读取package.json内容</button>
+    <div id="content"></div>
+  </div>
+  <div>
+    <div>eg: 02</div>
+    <button id="new">new window</button>
+    <button id="remote-new">remote new window</button>
+  </div>
+  <div>
+    <div>eg: 03</div>
+    <button id="send">send</button><br />
+    <button id="sendFeedback">send feedback</button><br />
+    <button id="sendSync">send sync</button><br />
+    <button id="render2render">render to render</button><br />
+    <button id="webContents">render to render by webContents</button><br />
+  </div>
+  <div>
+    <div>eg: 04</div>
+    <button id="shellDom">通过shell打开外部链接</button><br />
+  </div>
+  <div>
+    <div>eg: 05</div>
+    <button id="showError">showError</button><button id="showMsg">showMsg</button><button
+      id="showOpenDialog">showOpenDialog</button><button id="saveDialog">saveDialog</button>
+  </div>
+  <div>
+    <div>eg: 06</div>
+    <button id="showNotification">消息通知</button>
+  </div>
+  <div>
+      <div>eg: 07</div>
+      <div>
+          <h2>双击下面信息复制</h2>
+          <div>双击号码复制：<p id='msg'>18823425830</p></div>
+          <button id="plat">粘贴</button><br />
+          <input id="text" type="text" />
+        </div>
+        <div>
+          <h2>复制图片到界面</h2>
+          <button id="copyImg">复制图片</button>
+        </div>
+      </div>
+    </div>
+  <div>
+    <div>eg: 08</div>
+    <webview id="myWebview" src="https://electronjs.org/" style="position:fixed; width:100%; height:600px"></webview>
+  </div>
+  <script src="render/read.js"></script>
+  <script src="render/new.js"></script>
+  <script src="render/menu.js"></script>
+  <script src="render/ipcRender.js"></script>
+  <script src="render/renderToRender.js"></script>
+  <script src="render/shell.js"></script>
+  <script src="render/dialog.js"></script>
+  <script src="render/notification.js"></script>
+  <script src="render/clipboards.js"></script>
+  <script src="render/webview.js"></script>
+</body>
+
+</html>

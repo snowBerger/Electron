@@ -1,25 +1,25 @@
 <template>
   <div class="setting">
-    <!-- <div>
-      番茄工作法：最简单有效的时间管理方式
-      输入一个任务，将番茄时间设为25分钟点【开始工作】
-      专注工作，中途不允许做任何与该任务无关的事，直到番茄时钟响起
-      然后短暂休息一下，5分钟左右
-    </div>-->
     <label for="workDuration">
-      工作时长：
+      <span>work duration:</span>
       <input type="number" name="workDuration" id="work-duration" v-model="workDuration">
     </label>
     <label for="restDuration">
-      休息时长：
+      <span>rest duration:</span>
       <input type="number" name="restDuration" id="rest-duration" v-model="restDuration">
     </label>
-    <button @click="settingConfig">确定</button>
+    <div>
+      <button @click="cancle">cancle</button>
+      <button @click="settingConfig">ok</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { ipcRenderer } from "electron";
+
 export default {
+  name: "setting",
   data() {
     return {
       workDuration: 25,
@@ -32,15 +32,15 @@ export default {
       default: () => {}
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     settingConfig() {
       localStorage.setItem("workDuration", this.workDuration);
       localStorage.setItem("restDuration", this.restDuration);
-      // this.$router.push('/')
-      this.initApp();
+      ipcRenderer.send("setting");
+    },
+    cancle() {
+      ipcRenderer.send("cancle");
     }
   }
 };
@@ -48,8 +48,36 @@ export default {
 
 <style lang="less" scoped>
 .setting {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   label {
     display: block;
+    margin: 10px;
+    & > span {
+      display: inline-block;
+      min-width: 100px;
+      text-align: right;
+      font-weight: 300;
+    }
+    & > input {
+      width: 120px;
+      height: 20px;
+      padding: 2px 5px;
+      margin-left: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+  }
+  & > div > button {
+    min-width: 56px;
+    margin: 10px 5px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    outline: none;
+    cursor: pointer;
   }
 }
 </style>
