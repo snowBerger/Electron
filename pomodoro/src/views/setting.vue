@@ -62,7 +62,7 @@ export default {
       font-weight: 300;
     }
     & > input {
-      width: 120px;
+      width: 80px;
       height: 20px;
       padding: 2px 5px;
       margin-left: 6px;

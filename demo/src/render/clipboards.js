@@ -20,7 +20,7 @@ plat.onclick = function () {
 let copyImg = document.querySelector('#copyImg')
 copyImg.onclick = function () {
   // 结合nativeImage模块
-  let image = nativeImage.createFromPath('../static/lover.png')
+  let image = nativeImage.createFromPath('../static/icon.png')
 
   // 复制图片
   clipboard.writeImage(image)

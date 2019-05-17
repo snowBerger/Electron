@@ -6,7 +6,7 @@ var {
 
 const path = require('path');
 
-var appIcon = new Tray(path.join(__dirname, '../static/lover.png'));
+var appIcon = new Tray(path.join(__dirname, '../static/icon.png'));
 
 const menu = Menu.buildFromTemplate([
   {

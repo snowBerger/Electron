@@ -5,6 +5,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import path from 'path'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -18,13 +19,13 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: tru
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 320,
+    width: 280,
     height: 400,
     frame: false,
     // resizable: false,
     // transparent: true,
     // opacity: 1.0,
-    icon: '/Users/berger/development/Electron/pomodoro/src/assets/logo.icns',
+    icon: path.join('/assets/images/icon.png'),
     webPreferences: {
       nodeIntegration: true
     }
@@ -32,8 +33,8 @@ function createWindow() {
 
   // Create the setting window.
   settingWin = new BrowserWindow({
-    width: 280,
-    height: 250,
+    width: 240,
+    height: 200,
     parent: win,
     show: false,
     webPreferences: {
@@ -81,6 +82,13 @@ function createWindow() {
           click: function () {
             shell.openExternal('https://github.com/snowBerger')
           },
+        },
+        {
+          label: '退出',
+          accelerator: 'command+q', // 绑定快捷键
+          click: function () {
+            app.exit()
+          }
         }
       ]
     },

@@ -60,9 +60,9 @@
       </div>
       <div v-if="timerFlag" class="timer">
         <CircleProgress
-          :diameter="120"
-          :line-width="10"
-          :font-size="30"
+          :diameter="220"
+          :line-width="16"
+          :font-size="52"
           :percent="progress"
           :text="(countdownM + '').padStart(2, '0') + ':' + (countdownS + '').padStart(2, '0')"
         />
@@ -161,7 +161,6 @@ export default {
   mounted() {
     this.initApp();
     ipcRenderer.on("initApp", (event, data) => {
-      console.log(123);
       this.initApp();
     });
   },
