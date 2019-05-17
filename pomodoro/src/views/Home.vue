@@ -60,16 +60,19 @@
       </div>
       <div v-if="timerFlag" class="timer">
         <CircleProgress
-          :diameter="240"
-          :line-width="18"
+          :diameter="120"
+          :line-width="10"
+          :font-size="30"
           :percent="progress"
           :text="(countdownM + '').padStart(2, '0') + ':' + (countdownS + '').padStart(2, '0')"
         />
-        <button @click="stop">stop</button>
-        <button
-          @click="rest"
-          v-if="timerFlag === 'task' && countdownM === 0 && countdownS === 0"
-        >rest</button>
+        <div>
+          <button @click="stop">stop</button>
+          <button
+            @click="rest"
+            v-if="timerFlag === 'task' && countdownM === 0 && countdownS === 0"
+          >rest</button>
+        </div>
       </div>
     </div>
     <div class="menu">
@@ -425,10 +428,18 @@ export default {
       }
     }
     .timer {
-      & > button {
-        margin: 10px 5px;
-        padding: 4px 10px;
-        border-radius: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      & > div:last-child {
+        margin-top: 10px;
+        & > button {
+          margin: 10px 5px;
+          padding: 4px 10px;
+          border-radius: 12px;
+          cursor: pointer;
+        }
       }
     }
   }
