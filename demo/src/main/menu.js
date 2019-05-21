@@ -60,55 +60,55 @@ let menus = [
       }
     ]
   },
-  // {
-  //   label: '帮助',
-  //   submenu: [
-  //     {
-  //       label: '我的团队',
-  //       click: function () {
-  //         openWeb('https://github.com/icx-front')
-  //       }
-  //     },
-  //     {
-  //       type: 'separator'
-  //     },
-  //     {
-  //       label: '联系我',
-  //       click: function () {
-  //         openWeb('https://github.com/snowBerger')
-  //       }
-  //     }
-  //   ]
-  // },
-  // {
-  //   label: '看视频',
-  //   submenu: [
-  //     {
-  //       label: '优酷',
-  //       click: function () {
-  //         openWebView('https://www.youku.com')
-  //       }
-  //     },
-  //     {
-  //       type: 'separator' // 分隔符
-  //     },
-  //     {
-  //       label: '爱奇艺',
-  //       click: function () {
-  //         openWebView('https://www.iqiyi.com/')
-  //       }
-  //     },
-  //     {
-  //       type: 'separator' // 分隔符
-  //     },
-  //     {
-  //       label: '腾讯视频',
-  //       click: function () {
-  //         openWebView('https://v.qq.com/')
-  //       }
-  //     }
-  //   ]
-  // }
+  {
+    label: '帮助',
+    submenu: [
+      {
+        label: '我的团队',
+        click: function () {
+          openWeb('https://gitlab.icarbonx.cn/front-web')
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '联系我',
+        click: function () {
+          openWeb('https://github.com/snowBerger')
+        }
+      }
+    ]
+  },
+  {
+    label: 'webView',
+    submenu: [
+      {
+        label: '优酷',
+        click: function () {
+          openWebView('https://www.youku.com')
+        }
+      },
+      {
+        type: 'separator' // 分隔符
+      },
+      {
+        label: '爱奇艺',
+        click: function () {
+          openWebView('https://www.iqiyi.com/')
+        }
+      },
+      {
+        type: 'separator' // 分隔符
+      },
+      {
+        label: '腾讯视频',
+        click: function () {
+          openWebView('https://v.qq.com/')
+        }
+      }
+    ]
+  }
 ]
 
 let menuTemp = Menu.buildFromTemplate(menus)

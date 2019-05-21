@@ -28,19 +28,15 @@
   </div>
   <div>
     <div>eg: 04</div>
-    <button id="shellDom">通过shell打开外部链接</button><br />
-  </div>
-  <div>
-    <div>eg: 05</div>
     <button id="showError">showError</button><button id="showMsg">showMsg</button><button
       id="showOpenDialog">showOpenDialog</button><button id="saveDialog">saveDialog</button>
   </div>
   <div>
-    <div>eg: 06</div>
+    <div>eg: 05</div>
     <button id="showNotification">消息通知</button>
   </div>
   <div>
-    <div>eg: 07</div>
+    <div>eg: 06</div>
     <div>
       <h3>双击复制内容到剪贴板：</h3>
       <p id='msg'>我爱工作，工作使我快乐。996万岁😄</p>
@@ -57,18 +53,22 @@
   </div>
   </div>
   <div>
+    <div>eg: 07</div>
+    <button id="shellDom">通过shell打开外部链接</button><br />
+  </div>
+  <div>
     <div>eg: 08</div>
-    <webview id="myWebview" src="https://electronjs.org/" style="position:fixed; width:100%; height:600px"></webview>
+    <webview id="myWebview" src="https://electronjs.org/" style="width:80%; height:400px; border: 1px solid #ccc;"></webview>
   </div>
   <script src="render/read.js"></script>
   <script src="render/new.js"></script>
-  <script src="render/menu.js"></script>
   <script src="render/ipcRender.js"></script>
   <script src="render/renderToRender.js"></script>
-  <script src="render/shell.js"></script>
+  <script src="render/menu.js"></script>
   <script src="render/dialog.js"></script>
   <script src="render/notification.js"></script>
   <script src="render/clipboards.js"></script>
+  <script src="render/shell.js"></script>
   <script src="render/webview.js"></script>
 </body>
 
