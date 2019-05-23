@@ -56,10 +56,6 @@ let template = [
 		label: '编辑',
 		submenu: [
 			{
-				label: '加载',
-				role: 'reload'
-			},
-			{
 				label: '撤销',
 				role: 'undo'
 			},
@@ -82,7 +78,9 @@ let template = [
 				label: '黏贴',
 				role: 'paste'
 			},
-
+			{
+				type: 'separator'
+			},
 			{
 				label: '删除',
 				role: 'delete'
@@ -97,12 +95,14 @@ let template = [
 		label: '视图',
 		submenu: [
 			{
-				label: '缩小',
-				role: 'zoomin'
+				label: '放大',
+				role: 'zoomin',
+				accelerator: 'command+i'
 			},
 			{
-				label: '放大',
-				role: 'zoomout'
+				label: '缩小',
+				role: 'zoomout',
+				accelerator: 'command+o'
 			},
 			{
 				label: '重置缩放',
