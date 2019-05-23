@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, Menu, ipcMain, shell } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -22,10 +22,10 @@ function createWindow() {
     width: 280,
     height: 400,
     frame: false,
-    // resizable: false,
+    resizable: false,
     // transparent: true,
     // opacity: 1.0,
-    icon: path.join('/assets/images/icon.png'),
+    icon: path.join(__static, 'logo.ico'),
     webPreferences: {
       nodeIntegration: true
     }
@@ -35,6 +35,8 @@ function createWindow() {
   settingWin = new BrowserWindow({
     width: 240,
     height: 200,
+    frame: false,
+    resizable: false,
     parent: win,
     show: false,
     webPreferences: {
@@ -63,48 +65,11 @@ function createWindow() {
     settingWin.hide()
   })
 
-  // 菜单项目
-  const menuTemp = Menu.buildFromTemplate([
-    {
-      label: 'Pomodoro',
-      submenu: [
-        {
-          label: '我的团队',
-          click: function () {
-            shell.openExternal('https://github.com/icx-front')
-          }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: '联系我',
-          click: function () {
-            shell.openExternal('https://github.com/snowBerger')
-          },
-        },
-        {
-          label: '退出',
-          accelerator: 'command+q', // 绑定快捷键
-          click: function () {
-            app.exit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click: function () {
-            shell.openExternal('https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95')
-          },
-        }
-      ]
-    }
-  ])
-  Menu.setApplicationMenu(menuTemp)
+  // set Dock icon
+  app.dock.setIcon(path.join(__static, 'logo.ico'))
+
+  require('./main/menu')
+  require('./main/tray')
 }
 
 // Quit when all windows are closed.
@@ -167,7 +132,7 @@ ipcMain.on('open-setting', (event, data) => {
 
 ipcMain.on('setting', (event, data) => {
   settingWin.hide()
-  // 摄制完成，广播消息初始化App
+  // 设置完成，广播消息初始化App
   event.sender.send('initApp', '初始化App')
 })
 
