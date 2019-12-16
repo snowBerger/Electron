@@ -67,6 +67,12 @@
           :text="(countdownM + '').padStart(2, '0') + ':' + (countdownS + '').padStart(2, '0')"
         />
         <div>
+          <!-- <audio
+            ref="audio"
+            src="/Users/berger/development/Electron/pomodoro/src/assets/rest.mp3"
+            type="audio/mpeg"
+            crossorigin="anonymous"
+          ></audio> -->
           <button @click="stop">stop</button>
           <button
             @click="rest"
@@ -163,8 +169,26 @@ export default {
     ipcRenderer.on("initApp", (event, data) => {
       this.initApp();
     });
+    // /**
+    //  *  设置音乐分析器
+    //  */
+    // this.setAnalyser(this.createAnalyser());
   },
   methods: {
+    // /**
+    //  * 创建音乐分析器
+    //  */
+    // createAnalyser() {
+    //   const AC = new (window.AudioContext || window.webkitAudioContext)();
+    //   const analyser = AC.createAnalyser();
+    //   const gainnode = AC.createGain();
+    //   gainnode.gain.value = 1;
+    //   const source = AC.createMediaElementSource(this.$refs.audio);
+    //   source.connect(analyser);
+    //   analyser.connect(gainnode);
+    //   gainnode.connect(AC.destination);
+    //   return analyser;
+    // },
     /**
      * 初始化App
      */
@@ -249,6 +273,8 @@ export default {
       this.countdownM = this.restDuration;
       this.countdownS = 0;
       this.countDown();
+
+      this.$refs.audio.play();
     },
     /**
      * 暂停任务
